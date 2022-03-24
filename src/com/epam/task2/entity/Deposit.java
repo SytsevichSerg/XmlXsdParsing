@@ -5,19 +5,25 @@
  */
 package com.epam.task2.entity;
 
+import com.epam.task2.parser.YearMonthAdapter;
 import java.sql.Time;
+import java.util.Objects;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.YearMonth;
 
 
-public class Deposit {
+
+public abstract class Deposit {
     private String bankName;
     private String country;
     private String depositor;
     private String accountId;
     private double amount;
     private float profitability;
-    private Time timeConstraints;
+    private YearMonth timeConstraints;
 
-    public Deposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, Time timeConstraints) {
+    public Deposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
         this.bankName = bankName;
         this.country = country;
         this.depositor = depositor;
@@ -26,9 +32,8 @@ public class Deposit {
         this.profitability = profitability;
         this.timeConstraints = timeConstraints;
     }
-    /**
-     * @return the bankName
-     */
+    
+    @XmlElement(name = "bank-name")
     public String getBankName() {
         return bankName;
     }
@@ -110,20 +115,49 @@ public class Deposit {
         this.profitability = profitability;
     }
 
-    /**
-     * @return the timeConstraints
-     */
-    public Time getTimeConstraints() {
+    @XmlJavaTypeAdapter(YearMonthAdapter.class)
+    @XmlElement(name = "time-constraints")
+    public YearMonth getTimeConstraints() {
         return timeConstraints;
     }
 
     /**
      * @param timeConstraints the timeConstraints to set
      */
-    public void setTimeConstraints(Time timeConstraints) {
+    public void setTimeConstraints(YearMonth timeConstraints) {
         this.timeConstraints = timeConstraints;
     }
     
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deposit that = (Deposit) o;
+        return bankName == that.bankName && country == that.country && depositor == that.depositor
+                && accountId == that.accountId && amount == that.amount && Objects.equals(timeConstraints, that.timeConstraints);
+    }
+        
+    @Override
+    public int hashCode() {
+
+	final int prime = 101;
+	int hashCode = 1;
+        hashCode = prime * hashCode + (bankName == null ? 0 : getBankName().hashCode());
+        hashCode = prime * hashCode + (country == null ? 0 : getCountry().hashCode());
+        hashCode = prime * hashCode + (depositor == null ? 0 : getDepositor().hashCode());
+        hashCode = prime * hashCode + (accountId == null ? 0 : getAccountId().hashCode());
+        hashCode = prime * hashCode + (int)getAmount();
+        return hashCode;	
+    }
     
-    
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("bankName='").append(bankName).append('\'').append("country='").append(country).append('\'')
+			.append(", depositor='").append(depositor).append('\'').append(", accountId=").append(accountId)
+                        .append(", amount=").append(amount).append(", profitability=").append(profitability).append(", timeConstraints=").append(timeConstraints);   	     
+                    
+        return builder.toString();    
+    }
+
 }

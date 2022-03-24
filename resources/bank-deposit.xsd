@@ -14,17 +14,17 @@
 	
     <element name="deposit" type="deposit-type" abstract="true"/>
 
-    <element name="on-demand" type="on-demand-type" substitutionGroup="deposit"/>
+    <element name="on-demand-deposit" type="on-demand-type" substitutionGroup="deposit"/>
 
-    <element name="express" type="express-type" substitutionGroup="deposit"/>
+    <element name="express-deposit" type="express-type" substitutionGroup="deposit"/>
 	
-    <element name="checkin" type="checkin-type" substitutionGroup="deposit"/>
+    <element name="checkin-deposit" type="checkin-type" substitutionGroup="deposit"/>
 
-    <element name="accumulation" type="accumulation-type" substitutionGroup="deposit"/>
+    <element name="accumulation-deposit" type="accumulation-type" substitutionGroup="deposit"/>
 	
-    <element name="saving" type="saving-type" substitutionGroup="deposit"/>
+    <element name="saving-deposit" type="saving-type" substitutionGroup="deposit"/>
 	
-    <element name="metal" type="metal-type" substitutionGroup="deposit"/>
+    <element name="metal-deposit" type="metal-type" substitutionGroup="deposit"/>
 	
     <complexType name="deposit-type">
 	<sequence>
@@ -41,10 +41,10 @@
             <attribute name="account-id" use="required" type="ID"/>
             <attribute name="amount-on-deposit" use="required" type="double"/>
             <attribute name="profitability" use="optional" type="fractionDigits"/>
-            <element name="time-constraints" use="optional" type="duration">
+            <element name="time-constraints" use="optional">
                 <simpleType>
-                    <restriction base='duration'>
-                        <pattern value='P\p{Nd}{2}Y\p{Nd}{2}M'/>
+                    <restriction base="gYearMonth">
+                        <pattern value="2[0-9][0-9][0-9]-(0[1-9])|(1[0-2])"/>
                     </restriction>
                 </simpleType>
             </element>

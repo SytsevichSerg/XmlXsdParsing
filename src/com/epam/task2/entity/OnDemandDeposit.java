@@ -1,6 +1,8 @@
 
 package com.epam.task2.entity;
 
+import java.sql.Time;
+import java.time.YearMonth;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -8,13 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 public class OnDemandDeposit extends Deposit{
     
-    OnDemandDeposit(){
-        
+    public OnDemandDeposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
+        super(bankName, country, depositor, accountId, amount, profitability, timeConstraints);
     }
-/*    public CaramelCandy(String vendorCode, String name, YearMonth expirationDate, int energy, Value value, List<Ingredient> ingredients, Production production, boolean isLollipop, String flavor) {
-        super(vendorCode, name, expirationDate, energy, value, ingredients, production);
-        this.isLollipop = isLollipop;
-        this.flavor = flavor;
-    }
-*/
+    
+
 }

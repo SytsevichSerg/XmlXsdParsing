@@ -1,16 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bank-deposits xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:noNamespaceSchemaLocation="bank-deposit.xsd">
-	<on-demand>
+	<on-demand-deposit>
+		<bank-name>Absolutbank</bank-name>
+                <country>BY</country>
+                <depositor>Sytsevich Siarhei</depositor>
+		<account-id>AT462050507008506950</account-id>
+		<amount-on-deposit>10000</amount-on-deposit>
+		<profitability>15.5</profitability>
+		<time-constraints>P1Y6M</time-constraints>
+	</on-demand-deposit>
+        <metal-deposit>
+		<bank-name>Absolutbank</bank-name>
+                <country>RU</country>
+                 <depositor>Sytsevich Siarhei</depositor>
+		<account-id>AT462050507008506951</account-id>
+		<amount-on-deposit>1157,55</amount-on-deposit>
+                <metal>Ag</metal>
+                <metal-purchase-rate>77,17</metal-purchase-rate>
+                <metal-sales-rate>87,79</metal-sales-rate>
+                <weight>15</weight>
+	</metal-deposit>
+        <saving-deposit>
+		<bank-name>Alpha-Bank</bank-name>
+                <country>BY</country>
+                <depositor>Sytsevich Siarhei</depositor>
+		<account-id>AT462050507008506952</account-id>
+		<amount-on-deposit>1000</amount-on-deposit>
+		<profitability>10.5</profitability>
+		<time-constraints>P6M</time-constraints>
+	</saving-deposit>
+        <accumulation-deposit>
+		<bank-name>SberBank</bank-name>
+                <country>BY</country>
+                <depositor>Sytsevich Siarhei</depositor>
+		<account-id>AT462050507008506953</account-id>
+		<amount-on-deposit>100000</amount-on-deposit>
+		<profitability>6.5</profitability>
+		<time-constraints>P4M</time-constraints>
+	</accumulation-deposit>
+        <checkin-deposit>
+		<bank-name>SberBank</bank-name>
+                <country>BY</country>
+                <depositor>Sytsevich Siarhei</depositor>
+		<account-id>AT462050507008506954</account-id>
+		<amount-on-deposit>100000</amount-on-deposit>
+		<profitability>6.5</profitability>
+		<time-constraints>P4M</time-constraints>
+        </checkin-deposit>
+        <express-deposit>
+		<bank-name>SberBank</bank-name>
+                <country>BY</country>
+                <depositor>Sytsevich Siarhei</depositor>
+		<account-id>AT462050507008506955</account-id>
+		<amount-on-deposit>100000</amount-on-deposit>
+		<profitability>6.5</profitability>
+		<time-constraints>P4M</time-constraints>
+	</express-deposit>
+        <on-demand-deposit>
 		<bank-name>Absolutbank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>10000</amount-on-deposit>
-		<fractionDigits>15.5</fractionDigits>
+		<profitability>15.5</profitability>
 		<time-constraints>P1Y6M</time-constraints>
-	</on-demand>
-        <metal>
+	</on-demand-deposit>
+        <metal-deposit>
 		<bank-name>Absolutbank</bank-name>
                 <country>RU</country>
                  <depositor>Sytsevich Siarhei</depositor>
@@ -18,55 +74,55 @@
 		<amount-on-deposit>1157,55</amount-on-deposit>
                 <metal>Ag</metal>
                 <metal-purchase-rate>77,17</metal-purchase-rate>
-                <metal-sales-rate>87,79</metal-purchase-rate>
+                <metal-sales-rate>87,79</metal-sales-rate>
                 <weight>15</weight>
-	</metal>
-        <saving>
+	</metal-deposit>
+        <saving-deposit>
 		<bank-name>Alpha-Bank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>1000</amount-on-deposit>
-		<fractionDigits>10.5</fractionDigits>
+		<profitability>10.5</profitability>
 		<time-constraints>P6M</time-constraints>
-	</saving>
-         <accumulation>
+	</saving-deposit>
+        <accumulation-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-	</accumulation>
-         <checkin>
+	</accumulation-deposit>
+        <checkin-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-         </checkin>
-      <express>
+        </checkin-deposit>
+        <express-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-	</express>
-        <on-demand>
+	</express-deposit>
+        <on-demand-deposit>
 		<bank-name>Absolutbank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>10000</amount-on-deposit>
-		<fractionDigits>15.5</fractionDigits>
+		<profitability>15.5</profitability>
 		<time-constraints>P1Y6M</time-constraints>
-	</on-demand>
-        <metal>
+	</on-demand-deposit>
+        <metal-deposit>
 		<bank-name>Absolutbank</bank-name>
                 <country>RU</country>
                  <depositor>Sytsevich Siarhei</depositor>
@@ -74,55 +130,55 @@
 		<amount-on-deposit>1157,55</amount-on-deposit>
                 <metal>Ag</metal>
                 <metal-purchase-rate>77,17</metal-purchase-rate>
-                <metal-sales-rate>87,79</metal-purchase-rate>
+                <metal-sales-rate>87,79</metal-sales-rate>
                 <weight>15</weight>
-	</metal>
-        <saving>
+	</metal-deposit>
+        <saving-deposit>
 		<bank-name>Alpha-Bank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>1000</amount-on-deposit>
-		<fractionDigits>10.5</fractionDigits>
+		<profitability>10.5</profitability>
 		<time-constraints>P6M</time-constraints>
-	</saving>
-         <accumulation>
+	</saving-deposit>
+        <accumulation-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-	</accumulation>
-         <checkin>
+	</accumulation-deposit>
+        <checkin-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-         </checkin>
-      <express>
+        </checkin-deposit>
+        <express-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-	</express>
-        <on-demand>
+	</express-deposit>
+        <on-demand-deposit>
 		<bank-name>Absolutbank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>10000</amount-on-deposit>
-		<fractionDigits>15.5</fractionDigits>
+		<profitability>15.5</profitability>
 		<time-constraints>P1Y6M</time-constraints>
-	</on-demand>
-        <metal>
+	</on-demand-deposit>
+        <metal-deposit>
 		<bank-name>Absolutbank</bank-name>
                 <country>RU</country>
                  <depositor>Sytsevich Siarhei</depositor>
@@ -130,99 +186,43 @@
 		<amount-on-deposit>1157,55</amount-on-deposit>
                 <metal>Ag</metal>
                 <metal-purchase-rate>77,17</metal-purchase-rate>
-                <metal-sales-rate>87,79</metal-purchase-rate>
+                <metal-sales-rate>87,79</metal-sales-rate>
                 <weight>15</weight>
-	</metal>
-        <saving>
+	</metal-deposit>
+        <saving-deposit>
 		<bank-name>Alpha-Bank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>1000</amount-on-deposit>
-		<fractionDigits>10.5</fractionDigits>
+		<profitability>10.5</profitability>
 		<time-constraints>P6M</time-constraints>
-	</saving>
-         <accumulation>
+	</saving-deposit>
+        <accumulation-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-	</accumulation>
-         <checkin>
+	</accumulation-deposit>
+        <checkin-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-         </checkin>
-      <express>
+        </checkin-deposit>
+        <express-deposit>
 		<bank-name>SberBank</bank-name>
                 <country>BY</country>
                 <depositor>Sytsevich Siarhei</depositor>
 		<account-id>AT462050507008506958</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
+		<profitability>6.5</profitability>
 		<time-constraints>P4M</time-constraints>
-	</express>
-        <on-demand>
-		<bank-name>Absolutbank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>10000</amount-on-deposit>
-		<fractionDigits>15.5</fractionDigits>
-		<time-constraints>P1Y6M</time-constraints>
-	</on-demand>
-        <metal>
-		<bank-name>Absolutbank</bank-name>
-                <country>RU</country>
-                 <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506959</account-id>
-		<amount-on-deposit>1157,55</amount-on-deposit>
-                <metal>Ag</metal>
-                <metal-purchase-rate>77,17</metal-purchase-rate>
-                <metal-sales-rate>87,79</metal-purchase-rate>
-                <weight>15</weight>
-	</metal>
-        <saving>
-		<bank-name>Alpha-Bank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>1000</amount-on-deposit>
-		<fractionDigits>10.5</fractionDigits>
-		<time-constraints>P6M</time-constraints>
-	</saving>
-         <accumulation>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
-		<time-constraints>P4M</time-constraints>
-	</accumulation>
-         <checkin>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
-		<time-constraints>P4M</time-constraints>
-         </checkin>
-      <express>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>100000</amount-on-deposit>
-		<fractionDigits>6.5</fractionDigits>
-		<time-constraints>P4M</time-constraints>
-	</express>
+	</express-deposit>
 </bank-deposits>
