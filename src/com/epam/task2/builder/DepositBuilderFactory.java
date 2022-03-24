@@ -16,7 +16,7 @@ public class DepositBuilderFactory {
         return instance;
     }
 
-    public DepositBuilderFactory createTariffBuilder(ParserType type) {
+    public DepositBuilderFactory createDepositBuilder(ParserType type) {
         switch (type) {
             case SAX -> {
                 return new DepositsSAXBuilder();

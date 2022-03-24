@@ -3,14 +3,19 @@ package com.epam.task2.entity;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlEnumValue;
 
 @XmlType(name = "metal")
 @XmlEnum
 public enum Metal {
-    AU("AU"),
-    AG("AG"),
-    PT("PT"),
-    PD("PD");
+    @XmlEnumValue("Au")
+    AU("Au"),
+    @XmlEnumValue("Ag")
+    AG("Ag"),
+    @XmlEnumValue("Pt")
+    PT("Pt"),
+    @XmlEnumValue("Pd")
+    PD("Pd");
 
     private final String value;
 

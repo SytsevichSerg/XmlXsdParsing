@@ -23,6 +23,10 @@ public abstract class Deposit {
     private float profitability;
     private YearMonth timeConstraints;
 
+    public Deposit() {
+        
+    }
+    
     public Deposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
         this.bankName = bankName;
         this.country = country;

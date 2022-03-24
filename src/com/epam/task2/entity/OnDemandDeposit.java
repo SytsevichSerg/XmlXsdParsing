@@ -10,6 +10,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 public class OnDemandDeposit extends Deposit{
     
+    public OnDemandDeposit(){
+        
+    }
+    
     public OnDemandDeposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
         super(bankName, country, depositor, accountId, amount, profitability, timeConstraints);
     }
