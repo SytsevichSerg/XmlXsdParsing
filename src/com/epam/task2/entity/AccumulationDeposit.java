@@ -11,8 +11,8 @@ public class AccumulationDeposit extends Deposit{
         
     }
     
-    public AccumulationDeposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
-        super(bankName, country, depositor, accountId, amount, profitability, timeConstraints);
+    public AccumulationDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
+        super(bank, country, depositor, accountId, amount, profitability, timeConstraints);
     }
     
 }

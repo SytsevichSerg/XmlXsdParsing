@@ -16,20 +16,18 @@ public class DepositBuilderFactory {
         return instance;
     }
 
-    public DepositBuilderFactory createDepositBuilder(ParserType type) {
+    public AbstractDepositBuilder createDepositBuilder(ParserType type) {
         switch (type) {
-            case SAX -> {
+            case SAX:  
                 return new DepositsSAXBuilder();
-            }
-
-            case DOM -> {
+       
+            case DOM : 
                 return new DepositsDOMBuilder();
-            }
-
-            case STAX -> {
+            
+            case STAX :
                 return new DepositsSTAXBuilder();
-            }
-            default -> {
+            
+            default : {
                 LOG.info("Constant is not present in enum" + type + "i build default SAX builder ");
                 return new DepositsSAXBuilder();
             }

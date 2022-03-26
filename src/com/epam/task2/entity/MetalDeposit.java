@@ -11,8 +11,8 @@ public class MetalDeposit extends Deposit{
         
     }
     
-    public MetalDeposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
-        super(bankName, country, depositor, accountId, amount, profitability, timeConstraints);
+    public MetalDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
+        super(bank, country, depositor, accountId, amount, profitability, timeConstraints);
     }
     
 }

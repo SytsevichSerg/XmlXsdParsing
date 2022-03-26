@@ -11,8 +11,8 @@ public class CheckinDeposit extends Deposit{
         
     }
     
-    public CheckinDeposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
-        super(bankName, country, depositor, accountId, amount, profitability, timeConstraints);
+    public CheckinDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
+        super(bank, country, depositor, accountId, amount, profitability, timeConstraints);
     }
     
 }

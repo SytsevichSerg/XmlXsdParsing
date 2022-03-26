@@ -15,8 +15,8 @@ import java.time.YearMonth;
 
 
 public abstract class Deposit {
-    private String bankName;
-    private String country;
+    private Bank bank;
+    private Country country;
     private String depositor;
     private String accountId;
     private double amount;
@@ -27,8 +27,8 @@ public abstract class Deposit {
         
     }
     
-    public Deposit(String bankName, String country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
-        this.bankName = bankName;
+    public Deposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, YearMonth timeConstraints) {
+        this.bank = bank;
         this.country = country;
         this.depositor = depositor;
         this.accountId = accountId;
@@ -38,28 +38,28 @@ public abstract class Deposit {
     }
     
     @XmlElement(name = "bank-name")
-    public String getBankName() {
-        return bankName;
+    public Bank getBank() {
+        return bank;
     }
 
     /**
      * @param bankName the bankName to set
      */
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
 
     /**
      * @return the country
      */
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
     /**
      * @param country the country to set
      */
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 

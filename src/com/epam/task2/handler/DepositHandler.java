@@ -2,7 +2,9 @@
 package com.epam.task2.handler;
 
 import com.epam.task2.entity.AccumulationDeposit;
+import com.epam.task2.entity.Bank;
 import com.epam.task2.entity.CheckinDeposit;
+import com.epam.task2.entity.Country;
 import com.epam.task2.entity.Deposit;
 import com.epam.task2.entity.DepositEnum;
 import com.epam.task2.entity.ExpressDeposit;
@@ -73,4 +75,79 @@ public class DepositHandler extends DefaultHandler{
             }
         }
     }
+    public void endElement(String uri, String localName, String qName) {
+        if (ELEMENT_ON_DEMAND_DEPOSIT.equals(qName)) {
+            deposits.add(currentOnDemandDeposit);
+        } else if (ELEMENT_ACCUMULATION_DEPOSIT.equals(qName)) {
+            deposits.add(currentAccumulationDeposit);
+        } else if (ELEMENT_CHECKIN_DEPOSIT.equals(qName)) {
+            deposits.add(currentCheckinDeposit);
+        } else if (ELEMENT_EXPRESS_DEPOSIT.equals(qName)) {
+            deposits.add(currentExpressDeposit);
+        } else if (ELEMENT_SAVING_DEPOSIT.equals(qName)) {
+            deposits.add(currentSavingDeposit);
+        } else if (ELEMENT_METAL_DEPOSIT.equals(qName)) {
+            deposits.add(currentMetalDeposit);
+        }
+    }
+     
+    public void characters(char[] ch, int start, int length) {
+        String data = new String(ch, start, length).trim();
+        if (currentXmlTag != null) {
+            switch (currentXmlTag) {
+                case BANK_NAME : currentDeposit.setBank(Bank.getBank(data));
+                break;
+                case COUNTRY : currentDeposit.setCountry(Country.getCounty(data));
+                break;
+                case DEPOSITOR : currentDeposit.setDepositor(data);
+                break;
+                case ACCOUNT_ID : currentDeposit.setAccountId(data);
+                break;
+                case AMOUNT_ON_DEPOSIT -> currentDeposit.setAmount(Double.parseDouble(data));
+                case PROFITABILITY -> currentDeposit.setProfitability(Float.parseFloat(data));
+                case TIME -> currentDeposit.setTimeConstraints(YearMonth.parse(data));
+                /*
+                case CHOCOLATE_TYPE -> {
+                    currentChocolateCandy = (ChocolateCandy) currentCandy;
+                    currentChocolateCandy.setChocolateType(ChocolateType.getChocolateType(data));
+                    currentCandy = currentChocolateCandy;//todo лишняя строка?
+                }
+                case FLAVOR -> {
+                    currentCaramelCandy = (CaramelCandy) currentCandy;
+                    currentCaramelCandy.setFlavor(data);
+                    currentCandy = currentCaramelCandy;//todo лишняя строка?
+                }
+                case LOLLIPOP -> {
+                    currentCaramelCandy = (CaramelCandy) currentCandy;
+                    currentCaramelCandy.setLollipop(Boolean.parseBoolean(data));
+                    currentCandy = currentCaramelCandy;//todo лишняя строка?
+                }
+                case INGREDIENT_NAME -> currentIngredient.setName(data);
+                case WEIGHT -> currentIngredient.setWeight(Integer.parseInt(data));
+                case CARBOHYDRATES -> {
+                    Value value = currentCandy.getValue();
+                    value.setCarbohydrates(Integer.parseInt(data));
+                    currentCandy.setValue(value);
+                }
+                case FATS -> {
+                    Value value = currentCandy.getValue();
+                    value.setFats(Integer.parseInt(data));
+                    currentCandy.setValue(value);
+                }
+                case PROTEINS -> {
+                    Value value = currentCandy.getValue();
+                    value.setProteins(Integer.parseInt(data));
+                    currentCandy.setValue(value);
+                }
+                */
+                case ENERGY -> currentCandy.setEnergy(Integer.parseInt(data));
+                case PRODUCTION -> currentCandy.setProduction(Production.getProduction(data));
+                case EXPIRATION_DATE -> currentCandy.setExpirationDate(YearMonth.parse(data));
+                default -> throw new EnumConstantNotPresentException(
+                        currentXmlTag.getDeclaringClass(), currentXmlTag.name());//fixme wrap exception
+            }
+        }
+        currentXmlTag = null;
+    }
+
 }
