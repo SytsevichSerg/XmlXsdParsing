@@ -3,226 +3,180 @@
            xsi:noNamespaceSchemaLocation="bank-deposit.xsd">
 	<on-demand-deposit>
 		<bank-name>Absolutbank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506950</account-id>
+        <country>BY</country>
+        <depositor>Sytsevich Siarhei</depositor>
+		<account-id>462050507008506950</account-id>
 		<amount-on-deposit>10000</amount-on-deposit>
-		<profitability>15.5</profitability>
-		<time-constraints>P1Y6M</time-constraints>
+		<profitability>15.375</profitability>
+		<time-constraints>2022-04-20</time-constraints>
 	</on-demand-deposit>
-        <metal-deposit>
+    <metal-deposit>
 		<bank-name>Absolutbank</bank-name>
-                <country>RU</country>
-                 <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506951</account-id>
-		<amount-on-deposit>1157,55</amount-on-deposit>
-                <metal>Ag</metal>
-                <metal-purchase-rate>77,17</metal-purchase-rate>
-                <metal-sales-rate>87,79</metal-sales-rate>
-                <weight>15</weight>
+        <country>RU</country>
+        <depositor>Andreas Bollermann</depositor>
+		<account-id>462050507008506951</account-id>
+		<metal>Ag</metal>
+        <weight>15</weight>
+		<metal-purchase-rate>77,17</metal-purchase-rate>
+               
 	</metal-deposit>
-        <saving-deposit>
+    <saving-deposit>
 		<bank-name>Alpha-Bank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506952</account-id>
+        <country>LT</country>
+        <depositor>Sytsevichus Siarheis</depositor>
+		<account-id>462050507008506952</account-id>
 		<amount-on-deposit>1000</amount-on-deposit>
 		<profitability>10.5</profitability>
-		<time-constraints>P6M</time-constraints>
+		<replenishment>false</replenishment>
+		<withdrawal>false</withdrawal>
+		<time-constraints>2023-04-20</time-constraints>
 	</saving-deposit>
-        <accumulation-deposit>
+    <accumulation-deposit>
 		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506953</account-id>
+        <country>LV</country>
+        <depositor>Sytsevichs Siarheis</depositor>
+		<account-id>462050507008506953</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
 		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
+		<date-until-replenishment-allowed></date-until-replenishment-allowed>
+		<time-constraints>2023-03-20</time-constraints>
+		<time-constraints>2023-04-20</time-constraints>
 	</accumulation-deposit>
-        <checkin-deposit>
+    <checkin-deposit>
 		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506954</account-id>
+        <country>RU</country>
+        <depositor>Сыцевич Сергей</depositor>
+		<account-id>462050507008506954</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
 		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
-        </checkin-deposit>
-        <express-deposit>
+		<irreducible-balance>1000</irreducible-balance>
+		<time-constraints>2023-04-20</time-constraints>
+    </checkin-deposit>
+    <express-deposit>
 		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506955</account-id>
+        <country>BY</country>
+        <depositor>Sytsevich Siarhei Vasilijevich</depositor>
+		<account-id>462050507008506955</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
 		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
+		<time-constraints>2023-04-20</time-constraints>
 	</express-deposit>
-        <on-demand-deposit>
-		<bank-name>Absolutbank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
+    <on-demand-deposit>
+		<bank-name>Priorbank</bank-name>
+        <country>BY</country>
+        <depositor>Sytsevich PAUL</depositor>
+		<account-id>462050507008506956</account-id>
 		<amount-on-deposit>10000</amount-on-deposit>
-		<profitability>15.5</profitability>
-		<time-constraints>P1Y6M</time-constraints>
+		<profitability>15.375</profitability>
+		<time-constraints>2022-04-21</time-constraints>
 	</on-demand-deposit>
-        <metal-deposit>
-		<bank-name>Absolutbank</bank-name>
-                <country>RU</country>
-                 <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506959</account-id>
-		<amount-on-deposit>1157,55</amount-on-deposit>
-                <metal>Ag</metal>
-                <metal-purchase-rate>77,17</metal-purchase-rate>
-                <metal-sales-rate>87,79</metal-sales-rate>
-                <weight>15</weight>
+    <metal-deposit>
+		<bank-name>Paritetbank</bank-name>
+        <country>US</country>
+        <depositor>Paul Bollermann</depositor>
+		<account-id>462050507008506957</account-id>
+		<metal>Au</metal>
+        <weight>1,5</weight>
+		<metal-purchase-rate>2977,17</metal-purchase-rate>
 	</metal-deposit>
-        <saving-deposit>
-		<bank-name>Alpha-Bank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
+    <saving-deposit>
+		<bank-name>MTBank-Bank</bank-name>
+        <country>DE</country>
+        <depositor>Sytsevichus Pauls</depositor>
+		<account-id>462050507008506958</account-id>
 		<amount-on-deposit>1000</amount-on-deposit>
 		<profitability>10.5</profitability>
-		<time-constraints>P6M</time-constraints>
+		<replenishment>false</replenishment>
+		<withdrawal>false</withdrawal>
+		<time-constraints>2023-04-20</time-constraints>
 	</saving-deposit>
-        <accumulation-deposit>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
+    <accumulation-deposit>
+		<bank-name>Tecnobank</bank-name>
+        <country>LV</country>
+        <depositor>Sytsevichs Pauls</depositor>
+		<account-id>462050507008506959</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
 		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
+		<date-until-replenishment-allowed></date-until-replenishment-allowed>
+		<time-constraints>2023-03-20</time-constraints>
+		<time-constraints>2023-04-20</time-constraints>
 	</accumulation-deposit>
-        <checkin-deposit>
+    <checkin-deposit>
 		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
+        <country>UA</country>
+        <depositor>Сыцевич Сергей</depositor>
+		<account-id>462050507008506960</account-id>
+		<amount-on-deposit>100000</amount-on-deposit>
+		<profitability>6.535</profitability>
+		<irreducible-balance>1000</irreducible-balance>
+		<time-constraints>2023-04-20</time-constraints>
+    </checkin-deposit>
+    <express-deposit>
+		<bank-name>SberBank</bank-name>
+        <country>BY</country>
+        <depositor>Sytsevich Paul Siarheevich</depositor>
+		<account-id>462050507008506961</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
 		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
-        </checkin-deposit>
-        <express-deposit>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>100000</amount-on-deposit>
-		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
+		<time-constraints>2023-04-20</time-constraints>
 	</express-deposit>
-        <on-demand-deposit>
-		<bank-name>Absolutbank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
+	 <on-demand-deposit>
+		<bank-name>Priorbank</bank-name>
+        <country>BY</country>
+        <depositor>Sytsevich PAUL</depositor>
+		<account-id>462050507008506962</account-id>
 		<amount-on-deposit>10000</amount-on-deposit>
-		<profitability>15.5</profitability>
-		<time-constraints>P1Y6M</time-constraints>
+		<profitability>15.375</profitability>
+		<time-constraints>2022-04-21</time-constraints>
 	</on-demand-deposit>
-        <metal-deposit>
-		<bank-name>Absolutbank</bank-name>
-                <country>RU</country>
-                 <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506959</account-id>
-		<amount-on-deposit>1157,55</amount-on-deposit>
-                <metal>Ag</metal>
-                <metal-purchase-rate>77,17</metal-purchase-rate>
-                <metal-sales-rate>87,79</metal-sales-rate>
-                <weight>15</weight>
+    <metal-deposit>
+		<bank-name>Paritetbank</bank-name>
+        <country>US</country>
+        <depositor>Paul Bollermann</depositor>
+		<account-id>462050507008506963</account-id>
+		<metal>Pt</metal>
+        <weight>5,5</weight>
+		<metal-purchase-rate>1977,17</metal-purchase-rate>
 	</metal-deposit>
-        <saving-deposit>
-		<bank-name>Alpha-Bank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
+    <saving-deposit>
+		<bank-name>MTBank-Bank</bank-name>
+        <country>DE</country>
+        <depositor>Sytsevichus Pauls</depositor>
+		<account-id>462050507008506964</account-id>
 		<amount-on-deposit>1000</amount-on-deposit>
 		<profitability>10.5</profitability>
-		<time-constraints>P6M</time-constraints>
+		<replenishment>false</replenishment>
+		<withdrawal>false</withdrawal>
+		<time-constraints>2023-04-20</time-constraints>
 	</saving-deposit>
-        <accumulation-deposit>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
+    <accumulation-deposit>
+		<bank-name>Tecnobank</bank-name>
+        <country>LV</country>
+        <depositor>Sytsevichs Pauls</depositor>
+		<account-id>462050507008506965</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
 		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
+		<date-until-replenishment-allowed></date-until-replenishment-allowed>
+		<time-constraints>2023-03-20</time-constraints>
+		<time-constraints>2023-04-20</time-constraints>
 	</accumulation-deposit>
-        <checkin-deposit>
+    <checkin-deposit>
 		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
+        <country>UA</country>
+        <depositor>Сыцевич Сергей</depositor>
+		<account-id>462050507008506966</account-id>
+		<amount-on-deposit>100000</amount-on-deposit>
+		<profitability>6.535</profitability>
+		<irreducible-balance>1000</irreducible-balance>
+		<time-constraints>2023-04-20</time-constraints>
+    </checkin-deposit>
+    <express-deposit>
+		<bank-name>SberBank</bank-name>
+        <country>BY</country>
+        <depositor>Sytsevich Paul Siarheevich</depositor>
+		<account-id>462050507008506967</account-id>
 		<amount-on-deposit>100000</amount-on-deposit>
 		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
-        </checkin-deposit>
-        <express-deposit>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>100000</amount-on-deposit>
-		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
-	</express-deposit>
-        <on-demand-deposit>
-		<bank-name>Absolutbank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>10000</amount-on-deposit>
-		<profitability>15.5</profitability>
-		<time-constraints>P1Y6M</time-constraints>
-	</on-demand-deposit>
-        <metal-deposit>
-		<bank-name>Absolutbank</bank-name>
-                <country>RU</country>
-                 <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506959</account-id>
-		<amount-on-deposit>1157,55</amount-on-deposit>
-                <metal>Ag</metal>
-                <metal-purchase-rate>77,17</metal-purchase-rate>
-                <metal-sales-rate>87,79</metal-sales-rate>
-                <weight>15</weight>
-	</metal-deposit>
-        <saving-deposit>
-		<bank-name>Alpha-Bank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>1000</amount-on-deposit>
-		<profitability>10.5</profitability>
-		<time-constraints>P6M</time-constraints>
-	</saving-deposit>
-        <accumulation-deposit>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>100000</amount-on-deposit>
-		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
-	</accumulation-deposit>
-        <checkin-deposit>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>100000</amount-on-deposit>
-		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
-        </checkin-deposit>
-        <express-deposit>
-		<bank-name>SberBank</bank-name>
-                <country>BY</country>
-                <depositor>Sytsevich Siarhei</depositor>
-		<account-id>AT462050507008506958</account-id>
-		<amount-on-deposit>100000</amount-on-deposit>
-		<profitability>6.5</profitability>
-		<time-constraints>P4M</time-constraints>
-	</express-deposit>
+		<time-constraints>2023-04-20</time-constraints>
+	</express-deposit> 
 </bank-deposits>
