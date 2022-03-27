@@ -11,13 +11,7 @@
     Иными словами, чтобы все-таки 0.1 + 0.1 + 0.1 == 0.3. Из-за ошибок представления, float приводит к утере точности, и такие простые на первый взгляд равенства не выполняются. 
     А это может быть критично в высокоточных научных вычислениях, и главное в сфере бизнеса и финансов!]]>
 </schema>
-    <element name="deposits">
-        <complexType>
-            <sequence>
-                <element ref="deposit" maxOccurs="unbounded"/>
-            </sequence>
-        </complexType>
-    </element>
+   
 	
     <element name="deposit" type="deposit-type" abstract="true"/>
 
@@ -41,45 +35,40 @@
                 <simpleType>
                     <!-- Простой элемент — это элемент XML, который содержит только текст. Простой элемент не может содержать другие элементы или атрибуты.-->
                     <restriction base="xs:string">
+                        <xs:maxLength value="100"/>
                         <xs:whiteSpace value="preserve"/>
                     </restriction>
                 </simpleType>
             </element>
-            <attribute name="account-id" use="required">
-                <simpleType>
-                    <!-- Простой элемент — это элемент XML, который содержит только текст. Простой элемент не может содержать другие элементы или атрибуты.-->
-                    <!-- Ограничения используются для того, чтобы определить приемлемые значения для XML элементов или атрибутов. Ограничения по XML элементам еще называют "фасетами" -->
-                    <restriction base="xs:ID">
-                        <xs:pattern value="[0-9]{7,29}"/>
-                    </restriction>
-                </simpleType>
-            </attribute>
-            <attribute name="amount-on-deposit"type="xs:decimal" use="optional" default="0"/>
-            <attribute name="profitability" use="optional" default="0.0">
+            <element name="amount-on-deposit" default="0.00"/>
+            <xs:simpleType>
+                    <xs:restriction base="xs:decimal">
+                        <xs:minInclusive value = "0"/>
+                        <xs:fractionDigits value="2"/>
+                    </xs:restriction>
+            </xs:simpleType>
+            <element name="profitability" default="0.000">
                 <xs:simpleType>
                     <xs:restriction base="xs:decimal">
-                        <xs:pattern fractionDigits="3"/>
+                        <xs:minInclusive value = "0"/>
+                        <xs:fractionDigits value="3"/>
                     </xs:restriction>
                 </xs:simpleType>
-            </attribute>
-            <attribute name="replenishment" type="boolean" use="optional" default="true"/> 
-            <attribute name="withdrawal" type="boolean" use="optional" default="true"/> 
-            <attribute name="irreducible-balance" type="xs:decimal" use="optional" default="0" />
-            <attribute name="date-until-replenishment-allowed" type="xs:date" use="optional" />
-            <!--Срок окончания вклада - это последняя дата хранения вклада по договору банковского вклада.-->
-            <element name="time-constraints" use="optional" type= "tns:CustomDateOrDate" /> <!-- может ли быть null и как проверять на неустановленность -->
-            <xs:simpleType name="CustomDateOrDate">
-                <xs:union memberTypes="CustomDate date"/>
-            </xs:simpleType>
-            <xs:simpleType name="CustomDate">
-                <xs:restriction base="xs:string">
-                    <xs:maxLength value="10"/>
-                    <xs:whiteSpace value="collapse"/>
-                    <xs:pattern value="\d{4}(-|\/)\d{2}(-|\/)d{2}"/>
-                </xs:restriction>
-            </xs:simpleType>
-            
-	</sequence>	
+            </element>
+        </sequence>
+        <attribute name="account-id" use="required">
+            <simpleType>
+                <!-- Простой элемент — это элемент XML, который содержит только текст. Простой элемент не может содержать другие элементы или атрибуты.-->
+                <!-- Ограничения используются для того, чтобы определить приемлемые значения для XML элементов или атрибутов. Ограничения по XML элементам еще называют "фасетами" -->
+                <restriction base="xs:ID">
+                    <xs:pattern value="[0-9]{7,29}"/>    
+                </restriction>        
+            </simpleType>    
+        </attribute>
+        <attribute name="deposit-callable" type="boolean" use="optional" default="true"/> <!-- пополняемый  -->
+        <attribute name="withdrawal-callable" type="boolean" use="optional" default="true"/> <!-- снимабильный  -->
+        
+       	
     </complexType>		
     <complexType name="on-demand-type"> 
         <![CDATA[-Депозиты до востребования во многом похожи на простые расчетные счета, 
@@ -94,6 +83,7 @@
         <![CDATA[счет, на который зачисляются проценты по депозитам и сама сумма депозита после истечения его срока]]>
         <complexContent>
             <extension base="deposit-type"/>
+             <element name="time-constraints" type= "xs:date" /> 
         </complexContent>
     </complexType>
     
@@ -104,6 +94,10 @@
         но ставки по ним, как правило, невысокие: на 0,5-1 процентного пункта ниже, чем по накопительным депозитам, и на 1-1,5 – чем по сберегательным.]]>
         <complexContent>
             <extension base="deposit-type"/>
+             <sequence>
+                 <element name="time-constraints" type= "xs:date"/>
+                 <element name="irreducible-balance" type="xs:decimal" default="0" />
+             </sequence> 
         </complexContent>
     </complexType>
 	
@@ -116,6 +110,10 @@
         Накопительный вклад предназначен для тех случаев, когда есть потребность собрать деньги на какую-либо серьезную покупку. ]]>
         <complexContent>
             <extension base="deposit-type"/>
+            <sequence>
+                <element name="time-constraints" type= "xs:date" />
+                <element name="date-until-replenishment-allowed" type="xs:date"/>
+            </sequence>
         </complexContent>
     </complexType>
 	
@@ -125,6 +123,7 @@
         чем по накопительным, и на 1-1,5 – чем по расчетным.]]>
         <complexContent>
             <extension base="deposit-type"/>
+            <element name="time-constraints" type= "xs:date" />
         </complexContent>
     </complexType>
 	
@@ -145,18 +144,11 @@
         Нужно уплачивать НДФЛ 13% от полученной прибыли, причем, скорее всего, вам придется делать это самостоятельно. ]]>
         <complexContent>
             <extension base="deposit-type"/>
-            <xs:element ref="metal" maxOccurs="4" minOccurs="1" > <!-- на одном депозиторе может быть макс 4 позиции -->
+            <xs:element name="metals">
                 <xs:complexType>
-                   <xs:sequence>
-                      <xs:attribute name="weigth"> <!-- по золоту может быть 0.1 грамм -->
-                            <xs:simpleType>
-                                <xs:restriction base="xs:decimal">
-                                    <xs:pattern fractionDigits="1"/>
-                                </xs:restriction>
-                            </xs:simpleType>
-                      </xs:attribute>  
-                      <xs:element name="metal-purchase-rate" type="xs:decimal"/>
-                   </xs:sequence>
+                    <xs:sequence>
+                        <xs:element ref="metal" minOccurs="1" maxOccurs="4"/>
+                    </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </complexContent>
@@ -191,7 +183,26 @@
             </restriction>
         </simpleType>
     </element>
-    <element name="metal">
+    <xs:element name="metal">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref= "metal-nomenclature" />
+                <xs:element name="weight" type="xs:decimal"/>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:minInclusive value = "0"/>
+                            <xs:fractionDigits value="1"/>       
+                        </xs:restriction>                
+                    </xs:simpleType>        
+                <xs:element name="metal-purchase-rate" type="xs:decimal"/>
+                    <xs:restriction base="xs:decimal">
+                        <xs:minInclusive value = "0"/>
+                        <xs:fractionDigits value ="2"/>
+                    </xs:restriction>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <element name="metal-nomenclature">
         <simpleType>
             <restriction base="string">
                 <enumeration value="Au"/>
@@ -200,5 +211,13 @@
                 <enumeration value="Pd"/>
             </restriction>
         </simpleType>
+    </element>
+    
+    <element name="deposits">
+        <complexType>
+            <sequence>
+                <element ref="deposit" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
     </element>
 </schema>
