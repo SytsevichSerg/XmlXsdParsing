@@ -4,8 +4,8 @@ package com.epam.task2.handler;
 
 public enum DepositXmlAttribute {
     ACCOUNT_ID("account-id"),
-    AMOUNT_ON_DEPOSIT("amount-on-deposit"),
-    PROFITABILITY("profitability");
+    DEPOSIT_CALLABLE("deposit-callable"),
+    WITHDRAWAL_CALLABLE("withdrawal-callable");
     
     private String name;
 

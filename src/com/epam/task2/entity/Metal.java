@@ -1,39 +1,58 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.epam.task2.entity;
 
-import javax.xml.bind.annotation.XmlEnum;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnumValue;
 
 @XmlType(name = "metal")
-@XmlEnum
-public enum Metal {
-    @XmlEnumValue("Au")
-    AU("Au"),
-    @XmlEnumValue("Ag")
-    AG("Ag"),
-    @XmlEnumValue("Pt")
-    PT("Pt"),
-    @XmlEnumValue("Pd")
-    PD("Pd");
+public class Metal implements Serializable {
 
-    private final String value;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    Metal(String value){
-        this.value = value;
+    public Long getId() {
+        return id;
     }
 
-    public String getName(){
-        return value;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public static Metal getMetal(String name){
-        for (Metal metal : Metal.values()) {
-            if(name.equals(metal.getName())){
-                return metal;
-            }
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Metal)) {
+            return false;
         }
-        return null;
+        Metal other = (Metal) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.epam.task2.entity.Metal[ id=" + id + " ]";
     }
     
 }

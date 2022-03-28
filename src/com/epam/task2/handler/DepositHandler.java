@@ -1,18 +1,11 @@
 
 package com.epam.task2.handler;
 
-import com.epam.task2.entity.AccumulationDeposit;
-import com.epam.task2.entity.Bank;
-import com.epam.task2.entity.CheckinDeposit;
-import com.epam.task2.entity.Country;
-import com.epam.task2.entity.Deposit;
-import com.epam.task2.entity.DepositEnum;
-import com.epam.task2.entity.ExpressDeposit;
-import com.epam.task2.entity.MetalDeposit;
-import com.epam.task2.entity.OnDemandDeposit;
-import com.epam.task2.entity.SavingDeposit;
+import com.epam.task2.entity.*;
+
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import org.xml.sax.Attributes;
@@ -26,10 +19,12 @@ public class DepositHandler extends DefaultHandler{
     private static final String ELEMENT_EXPRESS_DEPOSIT = DepositXmlTag.EXPRESS_DEPOSIT.getName();
     private static final String ELEMENT_SAVING_DEPOSIT = DepositXmlTag.SAVING_DEPOSIT.getName();
     private static final String ELEMENT_METAL_DEPOSIT = DepositXmlTag.METAL_DEPOSIT.getName();
+    private static final String ELEMENT_METALS = DepositXmlTag.METALS.getName();
+    private static final String ELEMENT_METAL = DepositXmlTag.METAL.getName();
     
     private Set<Deposit> deposits;
     private Deposit currentDeposit;
-    private DepositEnum currentEnum;
+    //private DepositEnum currentEnum;
     
     private OnDemandDeposit currentOnDemandDeposit;
     private AccumulationDeposit currentAccumulationDeposit;
@@ -39,11 +34,12 @@ public class DepositHandler extends DefaultHandler{
     private MetalDeposit currentMetalDeposit;
     
     private DepositXmlTag currentXmlTag;
-    private EnumSet<DepositEnum> withText;
+    private EnumSet<DepositXmlTag> withText;
+    private List<Metal> currentMetals;
     
     public DepositHandler() {
         deposits = new HashSet<Deposit>();
-        withText = EnumSet.range(DepositEnum.BANK, DepositEnum.TIME);
+        withText = EnumSet.range(DepositXmlTag.BANK_NAME, DepositXmlTag.METAL_PURCHASE_RATE);
     }
     public Set<Deposit> getDeposits() {
         return deposits;
@@ -52,6 +48,7 @@ public class DepositHandler extends DefaultHandler{
         
         if(ELEMENT_ON_DEMAND_DEPOSIT.equals(qName)){
             currentOnDemandDeposit = new OnDemandDeposit();
+            
             currentDeposit = currentOnDemandDeposit;//fixme warning
         } else if (ELEMENT_ACCUMULATION_DEPOSIT.equals(qName)) {
             currentAccumulationDeposit = new AccumulationDeposit();

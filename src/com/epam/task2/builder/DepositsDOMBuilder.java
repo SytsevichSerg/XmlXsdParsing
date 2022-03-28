@@ -110,13 +110,12 @@ public class DepositsDOMBuilder extends AbstractDepositBuilder {
         return Boolean.parseBoolean(booleanString);
     }
     
-    /*
     private Deposit buildDeposit(Element element, DepositXmlTag depositXmlTag) {
          
          Deposit deposit = new OnDemandDeposit();
 
         String bankName = getElementTextContent(element, DepositXmlTag.BANK_NAME.getName());
-        String country = getElementTextContent(element, TariffXmlTag.TARIFF_NAME.getValue());
+        String country = getElementTextContent(element, DepositXmlTag.COUNTRY.getName());
         OperatorName operatorName = OperatorName.getNameFromString(element.getAttribute(tariffXmlTag.OPERATOR_NAME.getValue()));
         int monthPayRoll = Integer.parseInt(getElementTextContent(element, TariffXmlTag.MONTH_PAY_ROLL.getValue()));
         int smsPrise = Integer.parseInt(getElementTextContent(element, TariffXmlTag.SMS_PRISE.getValue()));
@@ -153,7 +152,6 @@ public class DepositsDOMBuilder extends AbstractDepositBuilder {
         return tariff;
 
     }
-*/
     
     
 }
