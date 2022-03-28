@@ -12,10 +12,20 @@ public class SavingDeposit extends Deposit{
     public SavingDeposit(){
         
     }
+    
+    public SavingDeposit(String accountId, boolean depositCallable, boolean withdrawalCallable) {
+        super(accountId, depositCallable, withdrawalCallable);
+    }
+    
     public SavingDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, boolean depositCallable, boolean withdrawalCallable, LocalDate timeConstraints) {
         super(bank, country, depositor, accountId, amount, profitability, depositCallable, withdrawalCallable);
         
          this.timeConstraints = timeConstraints;
+    }
+    
+     public static SavingDeposit setNewSavingDeposit(Deposit deposit,  LocalDate timeConstraints) {
+        return new SavingDeposit(deposit.getBank(), deposit.getCountry(), deposit.getDepositor(), deposit.getAccountId(), 
+                deposit.getAmount(), deposit.getProfitability(), deposit.isDepositCallable(), deposit.isWithdrawalCallable(), timeConstraints);
     }
     
     @XmlElement(name = "time-constraints")

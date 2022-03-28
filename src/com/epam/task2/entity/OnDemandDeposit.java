@@ -12,8 +12,16 @@ public class OnDemandDeposit extends Deposit{
         
     }
     
+    public OnDemandDeposit(String accountId, boolean depositCallable, boolean withdrawalCallable) {
+        super(accountId, depositCallable, withdrawalCallable);
+    }
+    
     public OnDemandDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, boolean depositCallable, boolean withdrawalCallable) {
         super(bank, country, depositor, accountId, amount, profitability, depositCallable, withdrawalCallable);
+    }
+    public static OnDemandDeposit setNewOnDemandDeposit(Deposit deposit) {
+        return new OnDemandDeposit(deposit.getBank(), deposit.getCountry(), deposit.getDepositor(), deposit.getAccountId(), 
+                deposit.getAmount(), deposit.getProfitability(), deposit.isDepositCallable(), deposit.isWithdrawalCallable());
     }
     
     @Override

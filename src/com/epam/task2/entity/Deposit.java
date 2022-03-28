@@ -30,6 +30,14 @@ public abstract class Deposit {
         
     }
     
+    // from attributes
+    public Deposit(String accountId, boolean depositCallable, boolean withdrawalCallable) {
+        
+        this.accountId = accountId;
+        this.depositCallable = depositCallable;
+        this.withdrawalCallable = withdrawalCallable;
+    }
+    
     public Deposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, boolean depositCallable, boolean withdrawalCallable) {
         this.bank = bank;
         this.country = country;

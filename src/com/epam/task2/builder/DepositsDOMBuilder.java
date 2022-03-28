@@ -1,18 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.epam.task2.builder;
 
+import com.epam.task2.entity.AccumulationDeposit;
 import com.epam.task2.entity.Bank;
+import com.epam.task2.entity.CheckinDeposit;
 import com.epam.task2.entity.Country;
 import com.epam.task2.entity.Deposit;
+import com.epam.task2.entity.ExpressDeposit;
+import com.epam.task2.entity.Metal;
+import com.epam.task2.entity.MetalDeposit;
+import com.epam.task2.entity.MetalNomenclature;
 import com.epam.task2.entity.OnDemandDeposit;
+import com.epam.task2.exception.ParsingXMLException;
+import com.epam.task2.handler.DepositXmlAttribute;
 import com.epam.task2.handler.DepositXmlTag;
 import java.io.IOException;
 import java.net.URL;
-import java.time.YearMonth;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,6 +36,8 @@ public class DepositsDOMBuilder extends AbstractDepositBuilder {
     private DocumentBuilder documentBuilder;
     
     public DepositsDOMBuilder() {
+        
+        super();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             documentBuilder = factory.newDocumentBuilder();
@@ -40,7 +47,7 @@ public class DepositsDOMBuilder extends AbstractDepositBuilder {
     }
     
     @Override
-    public void buildSetDeposits(String fileName) {
+    public void buildSetDeposits(String fileName) throws ParsingXMLException {
         Document doc;
         try {
             ClassLoader loader = getClass().getClassLoader();
@@ -59,13 +66,72 @@ public class DepositsDOMBuilder extends AbstractDepositBuilder {
             LOG.error("Error while reading", e);
         }
     }
-    private void createDeposits(Element root, DepositXmlTag depositXmlTag) {
+    
+    private void createDeposits(Element root, DepositXmlTag depositXmlTag) throws ParsingXMLException {
         NodeList depositList = root.getElementsByTagName(depositXmlTag.getName());
         for (int i = 0; i < depositList.getLength(); i++) {
             Element depositElement = (Element) depositList.item(i);
             Deposit deposit = buildDeposit(depositElement, depositXmlTag);
             deposits.add(deposit);
         }
+    }
+    
+    private Deposit buildDeposit(Element element, DepositXmlTag depositXmlTag) throws ParsingXMLException {
+         
+        Deposit deposit = new OnDemandDeposit();
+        
+        Bank bank = getElementBank(element);
+        Country country = getElementCountry(element);
+        String depositor = getElementTextContent(element, DepositXmlTag.DEPOSITOR.getName());
+        String accountId = element.getAttribute(DepositXmlAttribute.ACCOUNT_ID.getName());
+        double amount = getElementDoubleContent(element, DepositXmlTag.AMOUNT_ON_DEPOSIT.getName());
+        float profitability = getElementFloatContent(element, DepositXmlTag.PROFITABILITY.getName());
+        boolean depositCallable = Boolean.parseBoolean(element.getAttribute(DepositXmlAttribute.DEPOSIT_CALLABLE.getName()));
+        boolean withdrawalCallable = Boolean.parseBoolean(element.getAttribute(DepositXmlAttribute.WITHDRAWAL_CALLABLE.getName()));
+        
+     
+        
+        LocalDate timeConstraints = LocalDate.parse(getElementTextContent(element, DepositXmlTag.TIME_CONSTRAINTS.getName()));
+        LocalDate dateUntil = LocalDate.parse(getElementTextContent(element, DepositXmlTag.DATE_UNTIL_REPLENISHMENT_ALLOWED.getName()));
+        double irreducibleBalance =  getElementDoubleContent(element, DepositXmlTag.IRREDUCIBLE_BALANCE.getName());
+        
+        
+        switch (depositXmlTag) {
+            
+            case SAVING_DEPOSIT:
+            case EXPRESS_DEPOSIT: {
+                ExpressDeposit temp = ExpressDeposit.setNewExpressDeposit(deposit, timeConstraints);
+                deposit = temp;
+            }break;
+            
+            case CHECKIN_DEPOSIT: {
+                CheckinDeposit temp = CheckinDeposit.setNewCheckinDeposit(deposit, timeConstraints, irreducibleBalance);
+                deposit = temp;
+            }break;
+            
+            case ACCUMULATION_DEPOSIT: {
+                AccumulationDeposit temp = AccumulationDeposit.setNewAccumulationDeposit(deposit, timeConstraints, dateUntil);
+                deposit = temp;
+            }break;
+            
+            case METAL_DEPOSIT: {
+                List<Metal> metals = buildMetalsList(element);
+                MetalDeposit temp = MetalDeposit.setNewMetalDeposit(deposit, metals);
+                deposit = temp;
+            }break;
+        }
+        
+        deposit.setBank(bank);
+        deposit.setCountry(country);
+        deposit.setDepositor(depositor);
+        deposit.setAccountId(accountId);
+        deposit.setAmount(amount);
+        deposit.setProfitability(profitability);
+        deposit.setDepositCallable(depositCallable);
+        deposit.setWithdrawalCallable(withdrawalCallable);
+
+        return deposit;
+
     }
     
     private float getElementFloatContent(Element element, String tagName) {
@@ -78,19 +144,13 @@ public class DepositsDOMBuilder extends AbstractDepositBuilder {
         return Double.parseDouble(stringDouble);
     }
      
-    private int getElementIntContent(Element element, String tagName) {
-        String stringInt = getElementTextContent(element, tagName);
-        return Integer.parseInt(stringInt);
-    }
-
-
     private String getElementTextContent(Element element, String tagName) {
         NodeList nodeList = element.getElementsByTagName(tagName);
         Node node = nodeList.item(0);
         return node.getTextContent();
     }
 
-    private Bank getElementBankName(Element element) {
+    private Bank getElementBank(Element element) {
         String bankName = getElementTextContent(element, DepositXmlTag.BANK_NAME.getName());
         return Bank.getBank(bankName);
     }
@@ -99,59 +159,33 @@ public class DepositsDOMBuilder extends AbstractDepositBuilder {
         String country = getElementTextContent(element, DepositXmlTag.COUNTRY.getName());
         return Country.getCounty(country);
     }
-
-    private YearMonth getElementYearMonthContent(Element element, String tagName) {
-        String yearMonthString = getElementTextContent(element, tagName);
-        return YearMonth.parse(yearMonthString);
-    }
-
-    private boolean getElementBooleanContent(Element candyElement, String tagName) {
-        String booleanString = getElementTextContent(candyElement, tagName);
-        return Boolean.parseBoolean(booleanString);
+    
+    private MetalNomenclature getElementMetalNomenclature(Element element) throws ParsingXMLException{
+        String name = getElementTextContent(element, DepositXmlTag.METAL_NOMENCLATURE.getName());
+        return MetalNomenclature.getMetalNomenclature(name);
     }
     
-    private Deposit buildDeposit(Element element, DepositXmlTag depositXmlTag) {
-         
-         Deposit deposit = new OnDemandDeposit();
-
-        String bankName = getElementTextContent(element, DepositXmlTag.BANK_NAME.getName());
-        String country = getElementTextContent(element, DepositXmlTag.COUNTRY.getName());
-        OperatorName operatorName = OperatorName.getNameFromString(element.getAttribute(tariffXmlTag.OPERATOR_NAME.getValue()));
-        int monthPayRoll = Integer.parseInt(getElementTextContent(element, TariffXmlTag.MONTH_PAY_ROLL.getValue()));
-        int smsPrise = Integer.parseInt(getElementTextContent(element, TariffXmlTag.SMS_PRISE.getValue()));
-        int costConnect = Integer.parseInt(getElementTextContent(element, TariffXmlTag.COST_CONNECT.getValue()));
-        LocalDate dateСonnectingTariff = LocalDate.parse(getElementTextContent(element, TariffXmlTag.DATE_CONNECTING_TARIFF
-                .getValue()));
-        switch (tariffXmlTag) {
-            case INTERNET_TARIFF -> {
-                int numberFreeMegabytes = Integer.parseInt(getElementTextContent(element, TariffXmlTag.NUMBER_FREE_MEGABYTES.getValue()));
-                int costMegabytesAfterFree = Integer.parseInt(getElementTextContent(element, TariffXmlTag.COST_MEGABYTES_AFTER_FREE.getValue()));
-                int costRoamingMegabytes = Integer.parseInt(getElementTextContent(element, TariffXmlTag.COST_ROAMING_MEGABYTES.getValue()));
-                int numberFreeMegabytesSocialNetworks = Integer.parseInt(getElementTextContent(element, TariffXmlTag.NUMBER_FREE_MEGABYTES_SOCIAL_NETWORKS.getValue()));
-                InternetTariff temp = InternetTariff.setNewInternetTariff(tariff, numberFreeMegabytes, costMegabytesAfterFree,
-                        costRoamingMegabytes, numberFreeMegabytesSocialNetworks);
-                tariff = temp;
-            }
-            case CALLING_TARIFF -> {
-                int preferredNumber = Integer.parseInt(getElementTextContent(element, tariffXmlTag.PREFERRED_NUMBER.getValue()));
-                int costInNetworkCalls = Integer.parseInt(getElementTextContent(element, tariffXmlTag.COST_IN_NETWORK_CALLS.getValue()));
-                int costOffNetworkCalls = Integer.parseInt(getElementTextContent(element, tariffXmlTag.COST_OFF_NETWORK_CALLS.getValue()));
-                int costLandlinePhoneCalls = Integer.parseInt(getElementTextContent(element, tariffXmlTag.COST_LANDLINE_PHONE_CALLS.getValue()));
-                CallingTariff temp = CallingTariff.setNewCallingTariff(tariff, preferredNumber, costInNetworkCalls,
-                        costOffNetworkCalls, costLandlinePhoneCalls);
-                tariff = temp;
-            }
+    private List<Metal> buildMetalsList(Element element) throws ParsingXMLException {
+        NodeList nodeList = element.getElementsByTagName(DepositXmlTag.METALS.getName());
+        Element metalsNode = (Element) nodeList.item(0);
+        NodeList metalNodeList = metalsNode.getElementsByTagName(DepositXmlTag.METAL.getName());
+        List<Metal> metals = new ArrayList<>();
+        for (int i = 0; i < metalNodeList.getLength(); i++) {
+            metals.add(buildMetal(metalNodeList.item(i)));
         }
-        tariff.setId(id);
-        tariff.setTariffName(tariffName);
-        tariff.setOperatorName(operatorName);
-        tariff.setMonthPayRoll(monthPayRoll);
-        tariff.setSmsPrise(smsPrise);
-        tariff.setCostConnect(costConnect);
-        tariff.setDateСonnectingTariff(dateСonnectingTariff);
-        return tariff;
-
+        return metals;
     }
-    
-    
+
+    private Metal buildMetal(Node node) throws ParsingXMLException {
+        Metal metal = new Metal();
+        Element element = (Element) node;
+        MetalNomenclature name = getElementMetalNomenclature(element);
+        double weight = getElementDoubleContent(element, DepositXmlTag.WEIGHT.getName());
+        double rate = getElementDoubleContent(element, DepositXmlTag.METAL_PURCHASE_RATE.getName());
+        metal.setNomencalture(name);
+        metal.setWeight(weight);
+        metal.setRate(rate);
+        return metal;
+    }
+       
 }

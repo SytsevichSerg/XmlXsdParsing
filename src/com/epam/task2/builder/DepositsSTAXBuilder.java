@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.epam.task2.builder;
 import com.epam.task2.entity.AccumulationDeposit;
 import com.epam.task2.entity.CheckinDeposit;
@@ -23,8 +19,7 @@ import org.apache.logging.log4j.Logger;
 public class DepositsSTAXBuilder extends AbstractDepositBuilder{
     
     private static final Logger LOG = LogManager.getLogger();
-    //private DepositHandler dh;
-    //private XMLReader reader;
+
     private ClassLoader loader;
     private XMLInputFactory inputFactory;
     private XMLStreamReader reader;
@@ -35,17 +30,6 @@ public class DepositsSTAXBuilder extends AbstractDepositBuilder{
         super();
         inputFactory = XMLInputFactory.newInstance();
         loader = getClass().getClassLoader();
-     /*   
-        dh = new DepositHandler();
-        try {
-            loader = getClass().getClassLoader();
-            reader = XMLReaderFactory.createXMLReader();
-            reader.setContentHandler(dh);
-            
-        } catch (9 e) {
-            System.err.print("SAX parser error: " + e);
-        }
-*/
     }
    
     @Override
@@ -60,7 +44,11 @@ public class DepositsSTAXBuilder extends AbstractDepositBuilder{
                 if (type == XMLStreamConstants.START_ELEMENT) {
                     name = reader.getLocalName();
                     if (name.equals(DepositXmlTag.ON_DEMAND_DEPOSIT.getName())
-                            || name.equals(DepositXmlTag.CHECKIN_DEPOSIT.getName())) {
+                            || name.equals(DepositXmlTag.EXPRESS_DEPOSIT.getName())
+                            || name.equals(DepositXmlTag.CHECKIN_DEPOSIT.getName())
+                            || name.equals(DepositXmlTag.ACCUMULATION_DEPOSIT.getName())
+                            || name.equals(DepositXmlTag.SAVING_DEPOSIT.getName())
+                            || name.equals(DepositXmlTag.METAL_DEPOSIT.getName())) {
                         Deposit deposit = buildDeposit();
                         deposits.add(deposit);
                     }

@@ -6,10 +6,6 @@
 package com.epam.task2.entity;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -18,41 +14,70 @@ import javax.xml.bind.annotation.XmlType;
 public class Metal implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    public Long getId() {
-        return id;
+    private MetalNomenclature nomencalture;
+    private double weight;
+    private double rate;
+
+    
+    
+    @XmlElement(name = "metal-nomenclature")
+    public MetalNomenclature getNomencalture() {
+        return nomencalture;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setNomencalture(MetalNomenclature nomencalture) {
+        this.nomencalture = nomencalture;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    @XmlElement(name = "weight")
+    public double getWeight() {
+        return weight;
     }
 
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+   @XmlElement(name = "metal-purchase-rate")
+   public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+    
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Metal)) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || object.getClass() != this.getClass()) {
             return false;
         }
-        Metal other = (Metal) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        Metal that = (Metal) object;
+        return weight == that.weight && rate == that.rate && 
+                nomencalture == that.nomencalture;
     }
-
+    
+    @Override
+    public int hashCode() {
+        final int prime = 101;
+        int hash = 1;
+        hash = prime*hash + (nomencalture == null ? 0 : nomencalture.hashCode());
+        hash = prime*hash + (int)weight;
+        hash = prime*hash + (int)rate;
+        return hash;
+    }
+    
     @Override
     public String toString() {
-        return "com.epam.task2.entity.Metal[ id=" + id + " ]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("metal-nomenclature='").append(nomencalture).append('\'').
+                append(", weight='").append(weight).append('\'').
+                append(", metal-purchase-rate=").append(rate);
+        return builder.toString();
     }
     
 }

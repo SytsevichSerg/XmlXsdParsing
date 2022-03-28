@@ -15,13 +15,23 @@ public class AccumulationDeposit extends Deposit{
     private LocalDate dateUntilReplenishmentAllowed;
     
     public AccumulationDeposit() {
-        
+         super();
     }
     
-    public AccumulationDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, boolean depositCallable, boolean withdrawalCallable, LocalDate timeConstraints, LocalDate dateUntilReplenishmentAllowed) {
+    public AccumulationDeposit(String accountId, boolean depositCallable, boolean withdrawalCallable) {
+        super(accountId, depositCallable, withdrawalCallable);
+    }
+    
+    public AccumulationDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, boolean depositCallable, boolean withdrawalCallable, 
+            LocalDate timeConstraints, LocalDate dateUntilReplenishmentAllowed) {
         super(bank, country, depositor, accountId, amount, profitability, depositCallable, withdrawalCallable);
         this.timeConstraints = timeConstraints;
         this.dateUntilReplenishmentAllowed = dateUntilReplenishmentAllowed;
+    }
+    
+    public static AccumulationDeposit setNewAccumulationDeposit(Deposit deposit,  LocalDate timeConstraints, LocalDate dateUntilReplenishmentAllowed) {
+        return new AccumulationDeposit(deposit.getBank(), deposit.getCountry(), deposit.getDepositor(), deposit.getAccountId(), 
+                deposit.getAmount(), deposit.getProfitability(), deposit.isDepositCallable(), deposit.isWithdrawalCallable(), timeConstraints, dateUntilReplenishmentAllowed);
     }
 
     @XmlElement(name = "time-constraints")

@@ -19,10 +19,19 @@ public class CheckinDeposit extends Deposit{
         
     }
     
+    public CheckinDeposit(String accountId, boolean depositCallable, boolean withdrawalCallable) {
+        super(accountId, depositCallable, withdrawalCallable);
+    }
+    
     public CheckinDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, boolean depositCallable, boolean withdrawalCallable, LocalDate timeConstraints, double irreducibleBalance) {
         super(bank, country, depositor, accountId, amount, profitability, depositCallable, withdrawalCallable);
         this.timeConstraints = timeConstraints;
         this.irreducibleBalance = irreducibleBalance;
+    }
+    
+     public static CheckinDeposit setNewCheckinDeposit(Deposit deposit,  LocalDate timeConstraints, double irreducibleBalance) {
+        return new CheckinDeposit(deposit.getBank(), deposit.getCountry(), deposit.getDepositor(), deposit.getAccountId(), 
+                deposit.getAmount(), deposit.getProfitability(), deposit.isDepositCallable(), deposit.isWithdrawalCallable(), timeConstraints, irreducibleBalance);
     }
 
     @XmlElement(name = "time-constraints")

@@ -15,9 +15,18 @@ public class MetalDeposit extends Deposit{
         metals = new ArrayList<>();
     }
     
+    public MetalDeposit(String accountId, boolean depositCallable, boolean withdrawalCallable) {
+        super(accountId, depositCallable, withdrawalCallable);
+    }
+    
     public MetalDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability, boolean depositCallable, boolean withdrawalCallable, List<Metal> metals) {
         super(bank, country, depositor, accountId, amount, profitability, depositCallable, withdrawalCallable);
         this.metals = metals;
+    }
+    
+    public static MetalDeposit setNewMetalDeposit(Deposit deposit, List<Metal> metals) {
+        return new MetalDeposit(deposit.getBank(), deposit.getCountry(), deposit.getDepositor(), deposit.getAccountId(), 
+                deposit.getAmount(), deposit.getProfitability(), deposit.isDepositCallable(), deposit.isWithdrawalCallable(), metals);
     }
 
     @XmlElementWrapper(name = "metals")

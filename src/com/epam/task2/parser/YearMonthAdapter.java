@@ -8,10 +8,6 @@ package com.epam.task2.parser;
 import java.time.YearMonth;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-/**
- *
- * @author Lena
- */
 public class YearMonthAdapter extends XmlAdapter<String, YearMonth> {
     public YearMonth unmarshal(String date) {
         return YearMonth.parse(date);

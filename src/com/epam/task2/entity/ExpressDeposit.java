@@ -13,10 +13,19 @@ public class ExpressDeposit extends Deposit{
         
     }
     
+    public ExpressDeposit(String accountId, boolean depositCallable, boolean withdrawalCallable) {
+        super(accountId, depositCallable, withdrawalCallable);
+    }
+    
     public ExpressDeposit(Bank bank, Country country, String depositor, String accountId, double amount, float profitability,  boolean depositCallable, boolean withdrawalCallable, LocalDate timeConstraints) {
         super(bank, country, depositor, accountId, amount, profitability, depositCallable, withdrawalCallable);
         
         this.timeConstraints = timeConstraints;
+    }
+    
+     public static ExpressDeposit setNewExpressDeposit(Deposit deposit,  LocalDate timeConstraints) {
+        return new ExpressDeposit(deposit.getBank(), deposit.getCountry(), deposit.getDepositor(), deposit.getAccountId(), 
+                deposit.getAmount(), deposit.getProfitability(), deposit.isDepositCallable(), deposit.isWithdrawalCallable(), timeConstraints);
     }
 
     @XmlElement(name = "time-constraints")
