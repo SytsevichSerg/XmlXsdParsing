@@ -1,16 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.epam.task2.entity;
 
-import com.epam.task2.parser.YearMonthAdapter;
-import java.math.BigDecimal;
-import java.sql.Time;
-import java.util.Objects;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.YearMonth;
 import javax.xml.bind.annotation.*;
 
 
