@@ -28,15 +28,8 @@ public class DepositHandler extends DefaultHandler{
     private static final String ELEMENT_METAL = DepositXmlTag.METAL.getName();
     
     private Set<Deposit> deposits;
-    private Deposit currentDeposit;
-    //private DepositEnum currentEnum;
     
-    //private OnDemandDeposit currentOnDemandDeposit;
-    //private AccumulationDeposit currentAccumulationDeposit;
-    //private CheckinDeposit currentCheckinDeposit;
-    //private ExpressDeposit currentExpressDeposit;
-    //private SavingDeposit currentSavingDeposit;
-    //private MetalDeposit currentMetalDeposit;
+    private Deposit currentDeposit;
     
     private DepositXmlTag currentXmlTag;
     private EnumSet<DepositXmlTag> withText;
@@ -52,19 +45,22 @@ public class DepositHandler extends DefaultHandler{
     }
     public void startElement(String uri, String localName, String qName, Attributes attrs) {
      
-        String id =null;
+        String id = null;
         boolean depositCallable = true; 
         boolean withdrawalCallable  = true;
         
         for(int i = 0; i< attrs.getLength(); i++)
         {
             switch (i) {
-                case 0: id = attrs.getValue(0);
-                    break;
-                case 1: depositCallable = attrs.getValue(1).equals("true");
-                    break;
-                case 2: withdrawalCallable = attrs.getValue(2).equals("true");
-                    break;
+                case 0: {
+                    id = attrs.getValue(0);
+                } break;
+                case 1: {
+                    depositCallable = Boolean.parseBoolean(attrs.getValue(1));
+                } break;
+                case 2: {
+                    withdrawalCallable = Boolean.parseBoolean(attrs.getValue(2));
+                } break;
             }
         }
         
@@ -103,8 +99,8 @@ public class DepositHandler extends DefaultHandler{
         }else if (ELEMENT_METAL.equals(qName)) {
             currentMetals.add(currentMetal);
         } else if (ELEMENT_METALS.equals(qName)) {
-            MetalDeposit deposit = (MetalDeposit) currentDeposit;
-            deposit.setMetals(currentMetals);
+            MetalDeposit metalDeposit = (MetalDeposit) currentDeposit;
+            metalDeposit.setMetals(currentMetals);
         }
     }
      

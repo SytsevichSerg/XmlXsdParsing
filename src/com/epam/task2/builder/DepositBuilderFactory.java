@@ -1,5 +1,7 @@
 
 package com.epam.task2.builder;
+import com.epam.task2.exception.ParsingXMLException;
+import javax.xml.bind.JAXBException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +18,7 @@ public class DepositBuilderFactory {
         return instance;
     }
 
-    public AbstractDepositBuilder createDepositBuilder(ParserType type) {
+    public AbstractDepositBuilder createDepositBuilder(ParserType type) throws ParsingXMLException, JAXBException {
         switch (type) {
             case SAX:  
                 return new DepositsSAXBuilder();
@@ -26,6 +28,9 @@ public class DepositBuilderFactory {
             
             case STAX :
                 return new DepositsSTAXBuilder();
+                
+            case JAXB:
+                return new DepositsJaxbBuilder();
             
             default : {
                 LOG.info("Constant is not present in enum" + type + "i build default SAX builder ");
