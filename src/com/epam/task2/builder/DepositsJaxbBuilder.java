@@ -24,7 +24,7 @@ public class DepositsJaxbBuilder extends AbstractDepositBuilder{
             JAXBContext context = JAXBContext.newInstance(Deposits.class);
             unmarshaller = context.createUnmarshaller();
         } catch (JAXBException jaxbException) {
-            LOG.error("CandiesJaxbBuilder not created. ", jaxbException);
+            LOG.error("DepositsJaxbBuilder is not created. ", jaxbException);
             throw new ParsingXMLException(jaxbException);
         }
     }
@@ -40,7 +40,7 @@ public class DepositsJaxbBuilder extends AbstractDepositBuilder{
                 deposits = depositsObject.getDeposits();
                 LOG.info("Set of deposits is built. " + deposits);
             } catch (FileNotFoundException | JAXBException exception) {
-                LOG.error("Exception when build Set of candies", exception);
+                LOG.error("Exception when build Set of deposits", exception);
                 throw new ParsingXMLException(exception);
             }
         } else {
