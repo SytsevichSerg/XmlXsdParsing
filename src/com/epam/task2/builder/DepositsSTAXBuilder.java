@@ -19,7 +19,6 @@ import com.epam.task2.validator.XmlFileValidator;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,6 @@ public class DepositsSTAXBuilder extends AbstractDepositBuilder{
 
     private ClassLoader loader;
     private XMLInputFactory inputFactory;
-    private XMLStreamReader reader;
     
     
     public DepositsSTAXBuilder(){
@@ -150,7 +148,6 @@ public class DepositsSTAXBuilder extends AbstractDepositBuilder{
                         DepositXmlTag.METAL_DEPOSIT        == tag) {
                         return deposit;
                     }
-                    
                 }
             }
         }

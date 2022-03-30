@@ -31,7 +31,7 @@ public class DepositsJaxbBuilder extends AbstractDepositBuilder{
     
     @Override
     public void buildSetDeposits(String fileName) throws ParsingXMLException {
-       String schemaFileName = ResourcePathUtil.getResourcePath(AbstractDepositBuilder.SCHEMA_RESOURCE_NAME);
+        String schemaFileName = ResourcePathUtil.getResourcePath(AbstractDepositBuilder.SCHEMA_RESOURCE_NAME);
         XmlFileValidator validator = XmlFileValidator.getInstance();
         if (validator.isCorrect(fileName, schemaFileName)) {
             try {

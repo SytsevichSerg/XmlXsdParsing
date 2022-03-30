@@ -48,22 +48,28 @@ public class DepositHandler extends DefaultHandler{
         String id = null;
         boolean depositCallable = true; 
         boolean withdrawalCallable  = true;
-        
-        for(int i = 0; i< attrs.getLength(); i++)
+
+        if(!qName.equals("deposits")) // first string in xml make big troubles
         {
-            switch (i) {
-                case 0: {
-                    id = attrs.getValue(0);
-                } break;
-                case 1: {
-                    depositCallable = Boolean.parseBoolean(attrs.getValue(1));
-                } break;
-                case 2: {
-                    withdrawalCallable = Boolean.parseBoolean(attrs.getValue(2));
-                } break;
+            for(int i = 0; i< attrs.getLength(); i++)
+            {
+                if(attrs.getLocalName(i)==DepositXmlAttribute.ACCOUNT_ID.getName())
+                {
+                    id = attrs.getValue(i);
+                }
+                
+                if(attrs.getLocalName(i)==DepositXmlAttribute.DEPOSIT_CALLABLE.getName())
+                {
+                    depositCallable =  Boolean.parseBoolean(attrs.getValue(i));
+                }
+                
+                if(attrs.getLocalName(i)==DepositXmlAttribute.WITHDRAWAL_CALLABLE.getName())
+                {
+                    withdrawalCallable =  Boolean.parseBoolean(attrs.getValue(i));
+                }
             }
         }
-        
+       
         if(ELEMENT_ON_DEMAND_DEPOSIT.equals(qName)){
             currentDeposit = new OnDemandDeposit(id, depositCallable, withdrawalCallable);
         } else if (ELEMENT_ACCUMULATION_DEPOSIT.equals(qName)) {

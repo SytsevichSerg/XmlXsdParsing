@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="deposit" type="deposit-type" abstract="true"/>
+
+    <xs:element name="on-demand-deposit" type="on-demand-type" substitutionGroup="deposit"/>
+
+    <xs:element name="express-deposit" type="express-type" substitutionGroup="deposit"/>
+	
+    <xs:element name="checkin-deposit" type="checkin-type" substitutionGroup="deposit"/>
+
+    <xs:element name="accumulation-deposit" type="accumulation-type" substitutionGroup="deposit"/>
+	
+    <xs:element name="saving-deposit" type="saving-type" substitutionGroup="deposit"/>
+	
+    <xs:element name="metal-deposit" type="metal-type" substitutionGroup="deposit"/>
+	
+    <xs:complexType name="deposit-type">
+		<xs:sequence>
+			<xs:element ref="bank-name"/>
+			<xs:element ref="country"/>
+            <xs:element name="depositor">
+                <xs:simpleType>
+                    <!-- Простой элемент — это элемент XML, который содержит только текст. Простой элемент не может содержать другие элементы или атрибуты.-->
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="100"/>
+                        <xs:whiteSpace value="preserve"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="amount-on-deposit" default="0.00">
+				<xs:simpleType>
+						<xs:restriction base="xs:decimal">
+							<xs:minInclusive value = "0"/>
+							<xs:fractionDigits value="2"/>
+						</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="profitability" default="0.000">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal">
+                        <xs:minInclusive value = "0"/>
+                        <xs:fractionDigits value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+        <!--xs:attribute name="account-id" type="xs:string" use="required"/-->
+		<!-- Простой элемент — это элемент XML, который содержит только текст. Простой элемент не может содержать другие элементы или атрибуты.-->
+        <!-- Ограничения используются для того, чтобы определить приемлемые значения для XML элементов или атрибутов. Ограничения по XML элементам еще называют "фасетами" -->
+		<xs:attribute name="account-id" use="required">
+            <xs:simpleType>
+                
+                <xs:restriction base="xs:ID">
+                    <xs:pattern value="[0-9]{7,29}"/>    
+                </xs:restriction>        
+            </xs:simpleType>    
+        </xs:attribute>
+        <xs:attribute name="deposit-callable" type="xs:boolean" use="optional" default="true"/> <!-- пополняемый  -->
+        <xs:attribute name="withdrawal-callable" type="xs:boolean" use="optional" default="true"/> <!-- снимабильный  -->
+    </xs:complexType>		
+    <xs:complexType name="on-demand-type"> 
+        <!--
+		<![CDATA[-Депозиты до востребования во многом похожи на простые расчетные счета, 
+            но с них нельзя что-то оплачивать, к ним не привязываются банковские карты. Деньги просто лежат и ждут своего часа.
+       time-constraints - отсутствует ]]>-->
+        <xs:complexContent>
+            <xs:extension base="deposit-type">
+				<xs:sequence></xs:sequence>
+			</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+    <xs:complexType name="express-type">
+        <!--[CDATA[счет, на который зачисляются проценты по депозитам и сама сумма депозита после истечения его срока]]-->
+        <xs:complexContent>
+            <xs:extension base="deposit-type">
+				<xs:sequence>
+					<xs:element name="time-constraints" type= "xs:date" />
+				</xs:sequence>					
+			</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="checkin-type">
+         <!--[CDATA[ По расходно-пополняемым можно совершать как приходные, так и расходные операции. 
+        Расходные операции по вкладу возможны до установленного банком !!!  неснижаемого остатка !!! .
+        Условия пополнения соответствуют условиям по накопительным вкладам. Подобные депозиты наиболее универсальны, 
+        но ставки по ним, как правило, невысокие: на 0,5-1 процентного пункта ниже, чем по накопительным депозитам, и на 1-1,5 – чем по сберегательным.]]-->
+        <xs:complexContent>
+            <xs:extension base="deposit-type">
+				 <xs:sequence>
+					 <xs:element name="time-constraints" type= "xs:date"/>
+					 <xs:element name="irreducible-balance" type="xs:decimal" default="0" />
+				 </xs:sequence>
+			</xs:extension>			 
+        </xs:complexContent>
+    </xs:complexType>
+	
+    <xs:complexType name="accumulation-type">
+        <!--[CDATA[ Накопительный (пополняемый) вклад – разновидность срочного вклада. 
+        Такие депозиты можно пополнять в течение срока хранения. Но чаще всего банки за определенное время до окончания этого срока (как правило, за 30 дней) 
+        прекращают прием дополнительных взносов во вклад. Банками могут устанавливаться ограничения на максимальный и минимальный размер дополнительных взносов. 
+        Например, разовая сумма пополнения должна быть не менее 10 000 рублей. Максимально допустимая сумма пополнений чаще всего совпадает с максимальной суммой вклада. 
+        Частичные снятия сумм со вклада запрещены. Процентные ставки по таким депозитам несколько ниже, чем по сберегательным, в среднем на 0,25-0,5 процентного пункта. 
+        Накопительный вклад предназначен для тех случаев, когда есть потребность собрать деньги на какую-либо серьезную покупку. ]]-->
+        <xs:complexContent>
+            <xs:extension base="deposit-type">
+				<xs:sequence>
+					<xs:element name="time-constraints" type= "xs:date" />
+					<xs:element name="date-until-replenishment-allowed" type="xs:date"/>
+				</xs:sequence>
+			</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+    <xs:complexType name="saving-type">
+        <!--[CDATA[Сберегательный вклад – разновидность срочного вклада. По таким депозитам запрещены частичное снятие сумм и пополнение. 
+        Проценты, как правило, начисляются в конце срока. Ставки по сберегательным вкладам самые высокие: в среднем на 0,25-0,5 процентного пункта выше, 
+        чем по накопительным, и на 1-1,5 – чем по расчетным.]]-->
+        <xs:complexContent>
+            <xs:extension base="deposit-type">
+				<xs:sequence>
+					<xs:element name="time-constraints" type= "xs:date"/>
+				</xs:sequence>
+			</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+	
+    <xs:complexType name="metal-type">
+        <!--[CDATA[ Обезличенные металлические счета (ОМС) — это счета, открываемые банком для учета драгоценных металлов. 
+        Их доходность зависит от динамики цен на тот металл, в котором открыт счет. Открывать счета можно в четырех видах металлов: золото, серебро, платина и палладий. 
+        Обычно открытие счета и его обслуживание бесплатно. Но при закрытии счетов клиенты несут небольшие издержки, так как получают сумму, 
+        установленную банком исходя из курса покупки того или иного металла. Спред между ценой покупки и ценой продажи у каждого банка составляет, как правило, несколько процентов. 
+        В этот спред, собственно, и закладывается прибыль банка от открытия и ведения металлических счетов. Зачисление на ОМС и выдача с него могут осуществляться как непосредственно драгметаллом, 
+        так и деньгами — в этом случае банк производит покупку или продажу металла за рубли (или валюту) по установленному на текущую дату курсу. 
+        Следует обратить внимание, что приобретение металла для зачисления на ОМС не облагается налогом на добавленную стоимость. 
+        Налог возник бы в том случае, если клиент приобрел металл в слитках для хранения вне специализированного хранилища банка. 
+        У ОМС есть серьезный недостаток — 
+        Доход не гарантирован — как и при других способах инвестирования, можно получить убыток.
+        На металлические счета, как правило, не начисляются проценты.
+        Счет не застрахован государством.
+        Банк самостоятельно устанавливает цену покупки и продажи металла, что может сократить вашу прибыль или увеличить убыток, а какому-то другому банку металл с ОМС продать нельзя.
+        Нужно уплачивать НДФЛ 13% от полученной прибыли, причем, скорее всего, вам придется делать это самостоятельно. ]]-->
+        <xs:complexContent>
+            <xs:extension base="deposit-type">
+				<xs:element name="metals">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="metal" minOccurs="1" maxOccurs="4"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="bank-name">
+        <xs:simpleType>
+            <xs:restriction base="string">
+                <xs:enumeration value="Absolutbank"/>
+                <xs:enumeration value="Alpha-Bank"/>
+                <xs:enumeration value="BankBelWEB"/>
+                <xs:enumeration value="BankWTB"/>
+                <xs:enumeration value="SberBank"/>
+                <xs:enumeration value="Tecnobank"/>
+                <xs:enumeration value="MTBank"/>
+                <xs:enumeration value="Paritetbank"/>
+                <xs:enumeration value="Priorbank"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="country">
+        <xs:simpleType>
+            <xs:restriction base="string">
+                <xs:enumeration value="AT"/>
+                <xs:enumeration value="PL"/>
+                <xs:enumeration value="BY"/>
+                <xs:enumeration value="RU"/>
+                <xs:enumeration value="DE"/>
+                <xs:enumeration value="US"/>
+                <xs:enumeration value="UA"/>
+                <xs:enumeration value="LT"/>
+                <xs:enumeration value="LV"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="metal">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref= "metal-nomenclature"/>
+                <xs:element name="weight">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:minInclusive value = "0"/>
+                            <xs:fractionDigits value="1"/>       
+                        </xs:restriction>                
+                    </xs:simpleType>
+				</xs:element>	
+                <xs:element name="metal-purchase-rate">
+                    <xs:restriction base="xs:decimal">
+                        <xs:minInclusive value = "0"/>
+                        <xs:fractionDigits value ="2"/>
+                    </xs:restriction>
+				</xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="metal-nomenclature">
+        <xs:simpleType>
+            <xs:restriction base="string">
+                <xs:enumeration value="Au"/>
+                <xs:enumeration value="Ag"/>
+                <xs:enumeration value="Pt"/>
+                <xs:enumeration value="Pd"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    
+    <xs:element name="deposits">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="deposit" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+
+	<!--[CDATA[ Главная мысль всего сказанного это то, что метаданные (данные о данных) следует записывать, как атрибуты, а сами данные, как элементы. 
+    Замечание: URI пространства имен не используется парсером для получения какой-либо информации. Цель всего этого состоит в том, чтобы дать пространству имен уникальное имя. 
+    Тем не менее, часто компании используют пространство имен, как указатель на веб-страницу с информацией об этом пространстве имен. 
+    
+    обоснование: Тип Decimal создан, чтобы операции над рациональными числами в компьютере выполнялись также, как они выполняются людьми, как их преподают в школе. 
+    Иными словами, чтобы все-таки 0.1 + 0.1 + 0.1 == 0.3. Из-за ошибок представления, float приводит к утере точности, и такие простые на первый взгляд равенства не выполняются. 
+    А это может быть критично в высокоточных научных вычислениях, и главное в сфере бизнеса и финансов!]]-->

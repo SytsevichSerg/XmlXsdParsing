@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 public abstract class AbstractDepositBuilder {
-    public static final String SCHEMA_RESOURCE_NAME = "bank-deposit.xsd";
+    public static final String SCHEMA_RESOURCE_NAME = "deposits.xsd";
     
     protected Set<Deposit> deposits;
     
