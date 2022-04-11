@@ -1,7 +1,7 @@
 
 package xmlxsdparsing;
 
-import com.epam.task2.handler.SimpleDepositHandler;
+//import com.epam.task2.handler.SimpleDepositHandler;
 import java.io.IOException;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -12,6 +12,7 @@ public class XmlXsdParsing {
 
 
     public static void main(String[] args){
+        /*
         try {
             SimpleDepositHandler handler = new SimpleDepositHandler();
             XMLReader reader = XMLReaderFactory.createXMLReader();
@@ -23,6 +24,7 @@ public class XmlXsdParsing {
         } catch (IOException exception) {
             System.err.print("I/O error" + exception);
         }
+*/
     }
     
 }
